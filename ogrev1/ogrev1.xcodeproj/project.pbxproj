@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7268C20E29A7B24900FE1B44 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7268C20D29A7B24900FE1B44 /* main.swift */; };
 		7268C21529A7B2AB00FE1B44 /* unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7268C21429A7B2AB00FE1B44 /* unit.swift */; };
+		72C4302429A7EE5D00DC2FDD /* combat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C4302329A7EE5D00DC2FDD /* combat.swift */; };
+		72C4302A29A7FA5B00DC2FDD /* fileIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C4302929A7FA5B00DC2FDD /* fileIO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +29,8 @@
 		7268C20A29A7B24900FE1B44 /* ogrev1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ogrev1; sourceTree = BUILT_PRODUCTS_DIR; };
 		7268C20D29A7B24900FE1B44 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		7268C21429A7B2AB00FE1B44 /* unit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unit.swift; sourceTree = "<group>"; };
+		72C4302329A7EE5D00DC2FDD /* combat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = combat.swift; sourceTree = "<group>"; };
+		72C4302929A7FA5B00DC2FDD /* fileIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fileIO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +64,9 @@
 			isa = PBXGroup;
 			children = (
 				7268C20D29A7B24900FE1B44 /* main.swift */,
+				72C4302929A7FA5B00DC2FDD /* fileIO.swift */,
 				7268C21429A7B2AB00FE1B44 /* unit.swift */,
+				72C4302329A7EE5D00DC2FDD /* combat.swift */,
 			);
 			path = ogrev1;
 			sourceTree = "<group>";
@@ -125,6 +131,8 @@
 			files = (
 				7268C20E29A7B24900FE1B44 /* main.swift in Sources */,
 				7268C21529A7B2AB00FE1B44 /* unit.swift in Sources */,
+				72C4302429A7EE5D00DC2FDD /* combat.swift in Sources */,
+				72C4302A29A7FA5B00DC2FDD /* fileIO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

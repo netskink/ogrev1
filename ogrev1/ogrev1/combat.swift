@@ -8,23 +8,23 @@
 import Foundation
 
 enum AttackAction {
-    block, // uses less stamina. Bonus to defense. 
-    normal,
-    heavy  // uses more stamina. Bonus to offense
+    case block // uses less stamina. Bonus to defense.
+    case normal
+    case heavy  // uses more stamina. Bonus to offense
 }
 
 enum AttackType {
-    ranged,
-    melee
+    case ranged
+    case melee
 }
 
 enum Terrain {
-    high_ground, // Bonus to offense and morale 
-    wooded, // Bonus to defense. 
-    entrenched, // Bonus to defense and morale
-    normal,
-    low_ground,  // Negative to offense and morale
-    sand  // Negative to movement and morale
+    case high_ground // Bonus to offense and morale
+    case wooded // Bonus to defense.
+    case entrenched // Bonus to defense and morale
+    case normal
+    case low_ground  // Negative to offense and morale
+    case sand  // Negative to movement and morale
 }
 
 class Combat {
@@ -37,41 +37,46 @@ class Combat {
         self.unit2 = unit2
     }
 
+    //
     // This coujld have a parameter for the type of attack
-    func peform(unit1: Unit, unit2: Unit) {
+    func perform(unit1: Unit, unit2: Unit) {
 
-        print("\(unit1.name) swings")
+        var toHit: Double
+
+        print("\(unit1.name) swings and ", terminator: "")
         // Ratio of offense:defense determines probability of hit
         // Ratio of morale gives slight adjustment
 
         // calculate toHit based upon ratio of offense to defense
         toHit = Double.random(in: 1.0 ... 100.0) * unit1.offense/unit2.defense 
-        print("toHit = \(toHit)")
+        //print("toHit = \(toHit)")
         // adjust based upon morale
         toHit +=  (unit1.morale/unit2.morale)*0.1
-        print("toHit adj = \(toHit)")
+        //print("toHit adj = \(toHit)")
         // Chose that attack has a 50% baseline
         if toHit > 50.0 {
             // On hit, unit1 increases morale, unit2 loses morale and hp
-            print("\(unit1.name) hits")
+            print("hits")
             unit1.morale *= 1.1
             unit2.morale *= 0.9
-            unit2.hp *= 0.9
+            // Damage is random between 1.0 and max of unit1.damage
+            unit2.hp -= Double.random(in: 1.0 ... unit1.damage)
         } else {
             // On miss, unit 1 loses morale and unit2 gains morale
-            print("\(unit1.name) misses")
+            print("misses")
             unit2.morale *= 1.1
             unit1.morale *= 0.9
         }
     }
 
+    //
+    //
     func round(unit1: Unit, unit2: Unit) {
 
         // Determine who swings first
         // offense and morale
         var initative1: Double
         var initative2: Double
-        var toHit: Double
 
 
         initative1 = Double.random(in: 1.0 ... 100.0) + unit1.offense  + unit1.morale
@@ -92,52 +97,6 @@ class Combat {
         unit1.stamina *= 0.9
         unit2.stamina *= 0.9
     }
-}
-
-func test_one() {
-    print("-----")
-    
-    let unit1 = Unit(name: "dwarf", offense: 5, defense: 8, stamina: 9, morale: 8, hp: 10)
-    
-    unit1.dump()
-}
-
-
-func test_two() {
-    print("-----")
-    
-    let unit1 = Unit(name: "dwarf", offense: 50, defense: 80, stamina: 90, morale: 80, hp: 10)
-    let unit2 = Unit(name: "orc", offense: 70, defense: 50, stamina:70, morale: 60, hp: 15)
-        
-    round(unit1: unit1, unit2: unit2)
-    unit1.dump()
-    unit2.dump()
-
-    
-}
-
-func test_three() {
-    print("-----")
-    
-    let unit1 = Unit(name: "dwarf", offense: 50, defense: 80, stamina: 90, morale: 80, hp: 10)
-    let unit2 = Unit(name: "orc", offense: 70, defense: 50, stamina:70, morale: 60, hp: 15)
-        
-    
-    while unit1.hp > 1 && unit2.hp > 1 {
-        round(unit1: unit1, unit2: unit2)
-        unit1.dump()
-        unit2.dump()
-    }
-    
-    if (unit1.hp < 1 ) {
-        print("\(unit1.name) dies!")
-    }
-
-    if (unit2.hp < 1 ) {
-        print("\(unit2.name) dies!")
-    }
-
-    
 }
 
 
