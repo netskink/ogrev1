@@ -10,7 +10,7 @@ import Foundation
 
 class Unit {
     var name: String
-    // values are 1-100
+    // values are 1-100. Initially.  Can scale during combat to be greater than 100
     var offense: Double
     var defense: Double
     var stamina: Double
@@ -38,66 +38,6 @@ class Unit {
     }
 }
 
-func round(unit1: Unit, unit2: Unit) {
-    // Determine who swings first
-    // offense and morale
-    var initative1: Double
-    var initative2: Double
-    var toHit: Double
-
-
-    initative1 = Double.random(in: 1.0 ... 100.0) + unit1.offense  + unit1.morale
-    initative2 = Double.random(in: 1.0 ... 100.0) + unit2.offense  + unit2.morale
-    
-    if initative1 > initative2 {
-        print("\(unit1.name) swings first")
-        // Ratio of offense:defense determines probability of hit
-        // Ratio of morale gives slight adjustment
-        toHit = Double.random(in: 1.0 ... 100.0) * unit1.offense/unit2.defense //+ (unit1.morale/unit2.morale)*0.1
-        print("toHit = \(toHit)")
-        toHit +=  (unit1.morale/unit2.morale)*0.1
-        print("toHit adj = \(toHit)")
-        if toHit > 50.0 {
-            print("\(unit1.name) hits")
-            unit1.morale *= 1.1
-            unit2.morale *= 0.9
-            unit2.hp *= 0.9
-        } else {
-            print("\(unit1.name) misses")
-            unit2.morale *= 1.1
-            unit1.morale *= 0.9
-        }
-    } else {
-        print("\(unit2.name) swings first")
-        toHit = Double.random(in: 1.0 ... 100.0) * unit2.offense/unit1.defense //+ (unit1.morale/unit2.morale)*0.1
-        print("toHit = \(toHit)")
-        toHit +=  (unit1.morale/unit2.morale)*0.1
-        print("toHit adj = \(toHit)")
-        if toHit > 50.0 {
-            print("\(unit2.name) hits")
-            unit2.morale *= 1.1
-            unit1.morale *= 0.9
-            unit1.hp *= 0.9
-        } else {
-            print("\(unit2.name) misses")
-            unit1.morale *= 1.1
-            unit2.morale *= 0.9
-        }
-    }
-
-    unit1.stamina *= 0.9
-    unit2.stamina *= 0.9
-
-    
-    
-    // unit 1 attacks/flees, update stamina, morale and hp
-    
-    
-    
-    // unit 2 attacks/flees, update stamina, morale and hp
-    
-    
-}
 
 func test_one() {
     print("-----")
