@@ -13,7 +13,19 @@ enum AttackAction {
     heavy  // uses more stamina. Bonus to offense
 }
 
+enum AttackType {
+    ranged,
+    melee
+}
 
+enum Terrain {
+    high_ground, // Bonus to offense and morale 
+    wooded, // Bonus to defense. 
+    entrenched, // Bonus to defense and morale
+    normal,
+    low_ground,  // Negative to offense and morale
+    sand  // Negative to movement and morale
+}
 
 class Combat {
 
@@ -25,7 +37,36 @@ class Combat {
         self.unit2 = unit2
     }
 
+    // This coujld have a parameter for the type of attack
+    func peform(unit1: Unit, unit2: Unit) {
+
+        print("\(unit1.name) swings")
+        // Ratio of offense:defense determines probability of hit
+        // Ratio of morale gives slight adjustment
+
+        // calculate toHit based upon ratio of offense to defense
+        toHit = Double.random(in: 1.0 ... 100.0) * unit1.offense/unit2.defense 
+        print("toHit = \(toHit)")
+        // adjust based upon morale
+        toHit +=  (unit1.morale/unit2.morale)*0.1
+        print("toHit adj = \(toHit)")
+        // Chose that attack has a 50% baseline
+        if toHit > 50.0 {
+            // On hit, unit1 increases morale, unit2 loses morale and hp
+            print("\(unit1.name) hits")
+            unit1.morale *= 1.1
+            unit2.morale *= 0.9
+            unit2.hp *= 0.9
+        } else {
+            // On miss, unit 1 loses morale and unit2 gains morale
+            print("\(unit1.name) misses")
+            unit2.morale *= 1.1
+            unit1.morale *= 0.9
+        }
+    }
+
     func round(unit1: Unit, unit2: Unit) {
+
         // Determine who swings first
         // offense and morale
         var initative1: Double
@@ -36,54 +77,20 @@ class Combat {
         initative1 = Double.random(in: 1.0 ... 100.0) + unit1.offense  + unit1.morale
         initative2 = Double.random(in: 1.0 ... 100.0) + unit2.offense  + unit2.morale
         
+        // Determine who attacks first. Perform attack
+        // and adjust stamina, morale and hp.  Repeat 
+        // for second attacker.
         if initative1 > initative2 {
-            print("\(unit1.name) swings first")
-            // Ratio of offense:defense determines probability of hit
-            // Ratio of morale gives slight adjustment
-            toHit = Double.random(in: 1.0 ... 100.0) * unit1.offense/unit2.defense //+ (unit1.morale/unit2.morale)*0.1
-            print("toHit = \(toHit)")
-            toHit +=  (unit1.morale/unit2.morale)*0.1
-            print("toHit adj = \(toHit)")
-            if toHit > 50.0 {
-                print("\(unit1.name) hits")
-                unit1.morale *= 1.1
-                unit2.morale *= 0.9
-                unit2.hp *= 0.9
-            } else {
-                print("\(unit1.name) misses")
-                unit2.morale *= 1.1
-                unit1.morale *= 0.9
-            }
+            perform(unit1: unit1, unit2: unit2)
+            perform(unit1: unit2, unit2: unit1)
         } else {
-            print("\(unit2.name) swings first")
-            toHit = Double.random(in: 1.0 ... 100.0) * unit2.offense/unit1.defense //+ (unit1.morale/unit2.morale)*0.1
-            print("toHit = \(toHit)")
-            toHit +=  (unit1.morale/unit2.morale)*0.1
-            print("toHit adj = \(toHit)")
-            if toHit > 50.0 {
-                print("\(unit2.name) hits")
-                unit2.morale *= 1.1
-                unit1.morale *= 0.9
-                unit1.hp *= 0.9
-            } else {
-                print("\(unit2.name) misses")
-                unit1.morale *= 1.1
-                unit2.morale *= 0.9
-            }
+            perform(unit1: unit2, unit2: unit1)
+            perform(unit1: unit1, unit2: unit2)
         }
 
+        // all units adjust stamina
         unit1.stamina *= 0.9
         unit2.stamina *= 0.9
-
-        
-        
-        // unit 1 attacks/flees, update stamina, morale and hp
-        
-        
-        
-        // unit 2 attacks/flees, update stamina, morale and hp
-        
-        
     }
 }
 
