@@ -39,7 +39,7 @@ class Combat {
 
     //
     // This coujld have a parameter for the type of attack
-    func perform(unit1: Unit, unit2: Unit) {
+    func resolveRound(unit1: Unit, unit2: Unit) {
 
         var toHit: Double
 
@@ -60,7 +60,8 @@ class Combat {
             unit1.morale *= 1.1
             unit2.morale *= 0.9
             // Damage is random between 1.0 and max of unit1.damage
-            unit2.hp -= Double.random(in: 1.0 ... unit1.damage)
+            // adjusted by stamina
+            unit2.hp -= Double.random(in: 1.0 ... unit1.damage)*(1 + myNormalize(a_numnber: unit1.stamina))
         } else {
             // On miss, unit 1 loses morale and unit2 gains morale
             print("misses")
@@ -71,7 +72,7 @@ class Combat {
 
     //
     //
-    func round(unit1: Unit, unit2: Unit) {
+    func performRound(unit1: Unit, unit2: Unit) {
 
         // Determine who swings first
         // offense and morale
@@ -79,18 +80,18 @@ class Combat {
         var initative2: Double
 
 
-        initative1 = Double.random(in: 1.0 ... 100.0) + unit1.offense  + unit1.morale
-        initative2 = Double.random(in: 1.0 ... 100.0) + unit2.offense  + unit2.morale
+        initative1 = Double.random(in: 1.0 ... 100.0) + unit1.offense/unit2.defense  + unit1.morale
+        initative2 = Double.random(in: 1.0 ... 100.0) + unit2.offense/unit1.defense  + unit2.morale
         
         // Determine who attacks first. Perform attack
         // and adjust stamina, morale and hp.  Repeat 
         // for second attacker.
         if initative1 > initative2 {
-            perform(unit1: unit1, unit2: unit2)
-            perform(unit1: unit2, unit2: unit1)
+            resolveRound(unit1: unit1, unit2: unit2)
+            resolveRound(unit1: unit2, unit2: unit1)
         } else {
-            perform(unit1: unit2, unit2: unit1)
-            perform(unit1: unit1, unit2: unit2)
+            resolveRound(unit1: unit2, unit2: unit1)
+            resolveRound(unit1: unit1, unit2: unit2)
         }
 
         // all units adjust stamina

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		722BCF7D29AFF9C900A1C6BB /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722BCF7C29AFF9C900A1C6BB /* utils.swift */; };
 		7268C20E29A7B24900FE1B44 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7268C20D29A7B24900FE1B44 /* main.swift */; };
 		7268C21529A7B2AB00FE1B44 /* unit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7268C21429A7B2AB00FE1B44 /* unit.swift */; };
 		72C4302429A7EE5D00DC2FDD /* combat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C4302329A7EE5D00DC2FDD /* combat.swift */; };
@@ -26,6 +27,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		722BCF7C29AFF9C900A1C6BB /* utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
+		722BCF8E29AFFF1400A1C6BB /* units.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = units.json; path = ogrev1/units.json; sourceTree = "<group>"; };
 		7268C20A29A7B24900FE1B44 /* ogrev1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ogrev1; sourceTree = BUILT_PRODUCTS_DIR; };
 		7268C20D29A7B24900FE1B44 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		7268C21429A7B2AB00FE1B44 /* unit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = unit.swift; sourceTree = "<group>"; };
@@ -47,6 +50,7 @@
 		7268C20129A7B24900FE1B44 = {
 			isa = PBXGroup;
 			children = (
+				722BCF8E29AFFF1400A1C6BB /* units.json */,
 				7268C20C29A7B24900FE1B44 /* ogrev1 */,
 				7268C20B29A7B24900FE1B44 /* Products */,
 			);
@@ -63,6 +67,7 @@
 		7268C20C29A7B24900FE1B44 /* ogrev1 */ = {
 			isa = PBXGroup;
 			children = (
+				722BCF7C29AFF9C900A1C6BB /* utils.swift */,
 				7268C20D29A7B24900FE1B44 /* main.swift */,
 				72C4302929A7FA5B00DC2FDD /* fileIO.swift */,
 				7268C21429A7B2AB00FE1B44 /* unit.swift */,
@@ -129,6 +134,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				722BCF7D29AFF9C900A1C6BB /* utils.swift in Sources */,
 				7268C20E29A7B24900FE1B44 /* main.swift in Sources */,
 				7268C21529A7B2AB00FE1B44 /* unit.swift in Sources */,
 				72C4302429A7EE5D00DC2FDD /* combat.swift in Sources */,
